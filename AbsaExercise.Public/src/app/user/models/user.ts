@@ -1,3 +1,14 @@
+export class Authentication {
+    public data: Token;
+    public message: string;
+    public success: boolean;
+}
+
+export class Token {
+    public token: string;
+    public userName: string;
+}
+
 export class Register {
     public userName: string;
     public password: string;
@@ -10,16 +21,5 @@ export class Login {
 }
 
 export class User {
-    public userName: string;
-}
-
-export class Authentication {
-    public data: Token;
-    public message: string;
-    public success: boolean;
-}
-
-export class Token {
-    public token: string;
     public userName: string;
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-member',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateMemberComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.initForm();
   }
 
+  initForm() {
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      country: [null, Validators.required]
+    });
+  }
+
+  create(member: any) {
+    
+  }
 }

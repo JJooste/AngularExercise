@@ -1,3 +1,23 @@
-<p>
-  list-members works!
-</p>
+<h2>Members</h2>
+<button class="btn btn-primary" (click)="newMember()">New Member</button>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Country</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let member of members">
+      <td>{{member.name}}</td>
+      <td>{{member.surname}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr *ngIf="members && members.length == 0">
+      <td colspan="4" class="emptyTable">No members to display... click <a class="pointer" (click)=newMember()>here</a> to add one</td>
+    </tr>
+  </tbody>
+</table>

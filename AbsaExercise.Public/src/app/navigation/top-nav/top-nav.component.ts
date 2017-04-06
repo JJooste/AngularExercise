@@ -33,6 +33,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.clearAuthentication();
+    this.router.navigate(['login']);
   }
 
   members() {
