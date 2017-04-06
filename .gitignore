@@ -1,0 +1,7 @@
+node_modules
+.idea
+.vscode
+npm-debug.log
+degub.log
+*.log
+server/assets/media/

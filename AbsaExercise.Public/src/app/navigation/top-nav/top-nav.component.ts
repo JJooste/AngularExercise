@@ -1,16 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-top-nav',
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.css']
 })
-export class TopNavComponent implements OnInit {
+export class TopNavComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router) { }
+  userName: string;
+
+  userNameSubscription: Subscription;
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.userName = this.authService.getUserName();
+    this.userNameSubscription = this.authService.userName$.subscribe(userName => {
+      this.userName = userName;
+    });
   }
 
   login() {
@@ -21,8 +31,15 @@ export class TopNavComponent implements OnInit {
     this.router.navigate(['register']);
   }
 
+  logout() {
+    this.authService.clearAuthentication();
+  }
+
   members() {
     this.router.navigate(['members']);
   }
 
+  ngOnDestroy() {
+    this.userNameSubscription.unsubscribe();
+  }
 }

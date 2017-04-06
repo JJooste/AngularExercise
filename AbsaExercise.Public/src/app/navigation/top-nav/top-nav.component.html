@@ -14,9 +14,13 @@
       <ul class="nav navbar-nav">
         <li><a (click)="members()" routerLinkActive="active" class="pointer">Members</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="!userName">
         <li><a (click)="login()" class="pointer">Login</a></li>
         <li><a (click)="register()" class="pointer">Register</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="userName">
+        <li><a>Hello {{userName}}!</a></li>
+        <li><a (click)="logout()" class="pointer">Log Out</a></li>
       </ul>
     </div>
   </div>
