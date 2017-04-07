@@ -8,7 +8,7 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'members'
+        redirectTo: 'members/new'
     },
     {
         path: 'members', canActivate: [AuthGuard],
