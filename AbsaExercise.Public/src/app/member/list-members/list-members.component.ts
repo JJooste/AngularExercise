@@ -27,4 +27,8 @@ export class ListMembersComponent implements OnInit {
     this.router.navigate(['members', 'new']);
   }
 
+  edit(member: Member) {
+    this.router.navigate(['members', 'edit', member._id ]);
+  }
+
 }

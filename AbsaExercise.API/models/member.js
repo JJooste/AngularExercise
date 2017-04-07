@@ -9,6 +9,11 @@ var memberSchema = new mongoose.Schema({
     surname: {
         type: String,
         required: true
+    },
+    country: {
+        type: Schema.Types.ObjectId,
+        ref: 'Country',
+        required: true
     }
 });
 

@@ -8,15 +8,38 @@ import { Observable } from 'rxjs';
 import { Member } from '../models/member';
 
 @Injectable()
-export class MemberService extends ServiceBase{
+export class MemberService extends ServiceBase {
 
   constructor(private http: Http, configService: ConfigService, authService: AuthService) {
     super(configService, authService);
-   }
+  }
 
-  getAll() : Observable<Member[]> {
+  getAll(): Observable<Member[]> {
     this.buildHeaders();
-    return this.http.get(this.configService.getApiURI() + 'member', {headers: this.headers}).map(res => {
+    return this.http.get(this.configService.getApiURI() + 'member', { headers: this.headers }).map(res => {
+      return res.json().data;
+    }).catch(this.handleError);
+  }
+
+  get(memberId: string): Observable<Member> {
+    this.buildHeaders();
+    return this.http.get(this.configService.getApiURI() + 'member/' + memberId, { headers: this.headers }).map(res => {
+      return res.json().data;
+    }).catch(this.handleError);
+  }
+
+
+  create(member: Member): Observable<Member> {
+    this.buildHeaders();
+    return this.http.post(this.configService.getApiURI() + 'member', JSON.stringify(member), { headers: this.headers }).map(res => {
+      return res.json().data;
+    }).catch(this.handleError);
+  }
+
+
+  update(member: Member): Observable<Member> {
+    this.buildHeaders();
+    return this.http.put(this.configService.getApiURI() + 'member', JSON.stringify(member), { headers: this.headers }).map(res => {
       return res.json().data;
     }).catch(this.handleError);
   }

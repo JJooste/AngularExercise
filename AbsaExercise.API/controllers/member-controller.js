@@ -6,7 +6,7 @@ var repo = require('../repositories/member-repository');
 var router = express.Router();
 
 router.get('/:id', auth.authenticateToken, function (req, res, next) {
-    repo.getOne(req.query.id, function (err, member) {
+    repo.getOne(req.params.id, function (err, member) {
         if (err)
             return res.status(500).json({
                 success: false,
@@ -21,7 +21,7 @@ router.get('/:id', auth.authenticateToken, function (req, res, next) {
 });
 
 router.get('', auth.authenticateToken, function (req, res, next) {
-    repo.getAll(function (err, member) {
+    repo.getAll(function (err, members) {
         if (err)
             return res.status(500).json({
                 success: false,
@@ -30,52 +30,62 @@ router.get('', auth.authenticateToken, function (req, res, next) {
 
         return res.json({
             success: true,
-            data: member
+            data: members
         });
     });
 });
 
 router.post('/', auth.authenticateToken, function (req, res, next) {
 
-    countryRepo.getOne(req.body.post._id, function (err, country) {
+    var member = new Member({
+        name: req.body.name,
+        surname: req.body.surname,
+        country: req.body.country
+    });
 
-        if (err) return res.status(500).json({
-            success: false,
-            message: err.message
-        });
+    repo.create(member, function (err, member) {
 
-        if (!post) {
+        if (err)
             return res.status(500).json({
                 success: false,
-                message: "Invalid country"
+                message: err.message
             });
-        }
+        else
+            return res.json({
+                success: true,
+                data: member
+            });
+    });
 
-        var member = new Member({
-            name: req.body.name,
-            surname: req.body.surname,
-            _post: req.body.post._id,
-            createdOnDate: now
+});
+
+router.put('/', auth.authenticateToken, function (req, res, next) {
+
+    repo.getOne(req.body._id, function (err, member) {
+        if (err)
+            return res.status(500).json({
+                success: false,
+                message: "Internal error: " + err
+            });
+
+        member.name = req.body.name;
+        member.surname = req.body.surname;
+        member.country = req.body.country;
+
+        repo.update(member, function (err, member) {
+
+            if (err)
+                return res.status(500).json({
+                    success: false,
+                    message: err.message
+                });
+            else
+                return res.json({
+                    success: true,
+                    data: member
+                });
         });
-
-        country.members.push(member);
-
-        country.save(function(err, country) {console.log(country)});
-
-        // repo.create(member, function (err, member) {
-        //     if (err)
-        //         return res.status(500)
-        //             .json({
-        //                 success: false,
-        //                 message: err
-        //             });
-
-        //     res.json({
-        //         success: true,
-        //         data: member
-        //     });
-        // })
-    })
+    });
 
 });
 

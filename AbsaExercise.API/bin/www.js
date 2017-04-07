@@ -83,7 +83,6 @@ function addDefaultCountries() {
 function createCountry(name) {
   var c = new country();
   c.name = name;
-  c.members = [];
   countryRepo.create(c, function (error, country) { });
 }
 

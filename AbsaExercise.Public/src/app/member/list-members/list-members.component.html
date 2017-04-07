@@ -13,8 +13,8 @@
     <tr *ngFor="let member of members">
       <td>{{member.name}}</td>
       <td>{{member.surname}}</td>
-      <td></td>
-      <td></td>
+      <td>{{member.country.name}}</td>
+      <td><a class="btn btn-default" (click)="edit(member)">Edit</a></td>
     </tr>
     <tr *ngIf="members && members.length == 0">
       <td colspan="4" class="emptyTable">No members to display... click <a class="pointer" (click)=newMember()>here</a> to add one</td>

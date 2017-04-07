@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListMembersComponent } from './list-members/list-members.component';
-import { CreateMemberComponent } from './create-member/create-member.component';
-import { EditMemberComponent } from './edit-member/edit-member.component';
+import { CreateEditMemberComponent } from './create-edit-member/create-edit-member.component';
 import { AuthGuard } from '../shared/guards/auth-guard.service';
 
 const routes: Routes = [
@@ -15,11 +14,11 @@ const routes: Routes = [
             },
             {
                 path: 'new',
-                component: CreateMemberComponent
+                component: CreateEditMemberComponent
             },
             {
                 path: 'edit/:member',
-                component: EditMemberComponent
+                component: CreateEditMemberComponent
             }
         ]
     }
