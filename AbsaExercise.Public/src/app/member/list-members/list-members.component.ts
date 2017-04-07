@@ -31,4 +31,8 @@ export class ListMembersComponent implements OnInit {
     this.router.navigate(['members', 'edit', member._id ]);
   }
 
+  buttonClicked(message: string) {
+    alert(message);
+  }
+
 }

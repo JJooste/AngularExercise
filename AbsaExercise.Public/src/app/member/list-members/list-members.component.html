@@ -1,5 +1,5 @@
 <h2>Members</h2>
-<button class="btn btn-primary" (click)="newMember()">New Member</button>
+<app-button [buttonText]="'New Member'" (buttonClicked)="newMember()"></app-button>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -21,3 +21,4 @@
     </tr>
   </tbody>
 </table>
+<app-button [buttonText]="'Alert'" (buttonClicked)="buttonClicked($event)"></app-button>

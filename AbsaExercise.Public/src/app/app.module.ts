@@ -33,11 +33,7 @@ export function getAuthHttp(http: Http) {
     MemberModule,
     NavigationModule
   ],
-  providers: [AuthGuard, {
-    provide: AuthHttp,
-    useFactory: getAuthHttp,
-    deps: [Http]
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

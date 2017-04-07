@@ -5,6 +5,7 @@ import { CreateEditMemberComponent } from './create-edit-member/create-edit-memb
 import { ListMembersComponent } from './list-members/list-members.component';
 import { MemberService } from './services/member.service';
 import { CountryService } from './services/country.service';
+import { SharedModule } from '../shared/shared.module';
 
 import { MemberRoutingModule } from './member-routing.module';
 
@@ -12,7 +13,8 @@ import { MemberRoutingModule } from './member-routing.module';
   imports: [
     CommonModule,
     MemberRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [CreateEditMemberComponent, ListMembersComponent],
   providers: [MemberService, CountryService]
