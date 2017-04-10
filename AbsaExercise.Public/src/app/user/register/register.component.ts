@@ -29,16 +29,18 @@ export class RegisterComponent implements OnInit {
   }
 
   register(register: Register) {
-    this.userService.register(register).subscribe(authentication => {
-      if(authentication.success) {
-        this.authService.saveAuthentication(authentication.data.token, authentication.data.userName);
-        this.router.navigate(['members']);
-      } else {
-        alert(authentication.message);
-      }
-    }, error => {
-
-    });
+    if (register.confirmPassword == register.password) {
+      this.userService.register(register).subscribe(authentication => {
+        if (authentication.success) {
+          this.authService.saveAuthentication(authentication.data.token, authentication.data.userName);
+          this.router.navigate(['members']);
+        } else {
+          alert(authentication.message);
+        }
+      });
+    } else {
+      alert("Passwords do not match.");
+    }
   }
 
   login() {
