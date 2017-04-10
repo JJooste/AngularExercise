@@ -2,17 +2,17 @@
   <h2>Login</h2>
   <div class="form-group">
     <label class="form-label">User Name</label>
-    <input class="form-control" formControlName="userName" />
+    <input class="form-control" formControlName="userName" placeholder="Username"/>
   </div>
 
   <div class="form-group">
     <label class="form-label">Password</label>
-    <input class="form-control" formControlName="password" type="password" />
+    <input class="form-control" formControlName="password" type="password" placeholder="Password" />
   </div>
 
   <div class="form-group">
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Login</button> <br />
     Need an account? <br />
-    Register <a class="pointer">here</a>
+    Register <a class="pointer" (click)="register()">here</a>
   </div>
 </form>

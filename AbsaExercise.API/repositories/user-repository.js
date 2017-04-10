@@ -5,11 +5,9 @@ var _ = require('underscore');
     repo.registerUser = function (user, next) {
 
         if (user.password === '') {
-            // TODO handle the event that a user regsiters without
-            // a password. Social Users would not have a password.
+            return next("Unable to register user with no password", null);
         }
 
-        // TODO - give more meaningful error if the username/email exists
         User.findOne({ userName: user.userName })
             .exec(function (err, existingUser) {
                 if (!err && !existingUser) {
@@ -20,7 +18,10 @@ var _ = require('underscore');
                         next(null, user);
                     });
                 } else {
-                    return next("Unable to register user", null);
+                    if (existingUser)
+                        return next("Username not available", null);
+                    else
+                        return next("Unable to register user, please try again later", null);
                 }
             });
 

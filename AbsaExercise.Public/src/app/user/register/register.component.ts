@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       userName: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.minLength(6)],
       confirmPassword: ['', Validators.required]
     });
   }
@@ -39,6 +39,10 @@ export class RegisterComponent implements OnInit {
     }, error => {
 
     });
+  }
+
+  login() {
+    this.router.navigate(['login']);
   }
 
 }
