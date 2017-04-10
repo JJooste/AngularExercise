@@ -12,7 +12,6 @@ var cors = require('cors');
 //var fileUpload = require('express-fileupload');
 var app = express();
 
-var cron = require('node-cron');
 app.set('JWT_SECRET', jwtConfig.secret);
 app.use(logger('dev'));
 app.use(bodyParser.json());

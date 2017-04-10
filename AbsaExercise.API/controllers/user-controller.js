@@ -3,7 +3,6 @@ var User = require('../models/user');
 var auth = require('../core/providers/authentication');
 var repo = require('../repositories/user-repository');
 var hash = require('../core/providers/hash');
-var config = require('../config/server');
 var router = express.Router();
 
 router.post(

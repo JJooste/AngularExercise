@@ -69,6 +69,8 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+
+//Populate lookup tables
 function addDefaultCountries() {
   countryRepo.getAll(function (error, countries) {
     if (!countries || countries.length == 0) {

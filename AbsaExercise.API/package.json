@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "angular-notification-icons": "^0.4.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
@@ -18,10 +17,7 @@
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.7.8",
     "morgan": "~1.7.0",
-    "node-cron": "^1.1.3",
-    "node-schedule": "^1.2.0",
     "node-uuid": "^1.4.7",
-    "nodemailer": "^3.1.3",
     "serve-favicon": "~2.3.0",
     "stringify": "^5.1.0",
     "underscore": "^1.8.3"
