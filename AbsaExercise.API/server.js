@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
     allowedOrigins: [
-        '*.localhost:*'
+        '*'
     ]
 }));
 routeConfig.configureRoutes(app);

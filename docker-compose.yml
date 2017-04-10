@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  angular: 
+    build: AbsaExercise.Public
+    ports:
+      - "4200:4200"
+
+  api: 
+    build: AbsaExercise.API
+    ports:
+      - "3000:3000"
+    links:
+      - database
+
+  database: 
+    image: mongo 
+    ports:
+      - "27017:27017"
