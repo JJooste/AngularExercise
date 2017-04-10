@@ -11,13 +11,6 @@ import { NavigationModule } from './navigation/navigation.module';
 import { AppComponent } from './app.component';
 
 import { AuthGuard } from './shared/guards/auth-guard.service';
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
-
-export function getAuthHttp(http: Http) {
-        return new AuthHttp(new AuthConfig({
-                noJwtError: true
-        }), http);
-}
 
 @NgModule({
   declarations: [

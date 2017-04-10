@@ -6,6 +6,7 @@ import { ConfigService } from '../config/config.service';
 import { AuthService } from './auth.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class ServiceBase {
@@ -26,23 +27,18 @@ export class ServiceBase {
     }
 
     public handleError(error: any) {
+
+
         if (error.status == 401) {
-            return Observable.throw('Unauthorized Access');
+            alert('Unauthenticated, please log in again');
         }
         if (error.status == 403) {
-            return Observable.throw('Forbidden Access');
+            alert('Unauthorized, please log in again');
         }
+
         var applicationError = error.headers.get('Application-Error');
-        var serverError = error.json();
-        var modelStateErrors: string = '';
-        if (!serverError.type) {
-            console.log(serverError);
-            for (var key in serverError) {
-                if (serverError[key])
-                    modelStateErrors += serverError[key] + '\n';
-            }
-        }
-        modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
-        return Observable.throw(applicationError || modelStateErrors || 'Server error');
+        var serverError = error.json().message;
+
+        return Observable.throw(applicationError || serverError || 'Server error');
     }
 }
