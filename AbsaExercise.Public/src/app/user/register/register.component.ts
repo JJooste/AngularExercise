@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
 
+  registering: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class RegisterComponent implements OnInit {
 
   register(register: Register) {
     if (register.confirmPassword == register.password) {
+      this.registering = true;
       this.userService.register(register).subscribe(authentication => {
         if (authentication.success) {
           this.authService.saveAuthentication(authentication.data.token, authentication.data.userName);
@@ -37,6 +40,10 @@ export class RegisterComponent implements OnInit {
         } else {
           alert(authentication.message);
         }
+        this.registering = false;
+      }, error => {
+        alert("Registration failed, please try again later.");
+        this.registering = false;
       });
     } else {
       alert("Passwords do not match.");

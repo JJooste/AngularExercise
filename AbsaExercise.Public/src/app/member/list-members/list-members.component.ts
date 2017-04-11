@@ -10,6 +10,8 @@ import { MemberService } from '../services/member.service';
 })
 export class ListMembersComponent implements OnInit {
   members: Member[];
+  loadingMembers: boolean;
+  loadingFailed: boolean = false;
 
   constructor(private memberService: MemberService, private router: Router) { }
 
@@ -18,8 +20,15 @@ export class ListMembersComponent implements OnInit {
   }
 
   loadMembers() {
+    this.loadingMembers = true;
+    this.loadingFailed = false;
+
     this.memberService.getAll().subscribe(res => {
       this.members = res;
+    }, error => {
+      this.loadingFailed = true;
+    }, () => {
+      this.loadingMembers = false;
     });
   }
 
@@ -28,7 +37,7 @@ export class ListMembersComponent implements OnInit {
   }
 
   edit(member: Member) {
-    this.router.navigate(['members', 'edit', member._id ]);
+    this.router.navigate(['members', 'edit', member._id]);
   }
 
   buttonClicked(message: string) {

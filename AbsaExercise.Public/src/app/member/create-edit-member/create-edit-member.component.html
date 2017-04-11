@@ -1,9 +1,9 @@
-<form [formGroup]="form" (ngSubmit)="save(form.value)">
-  <h2><span *ngIf="memberId">Edit</span><span *ngIf="!memberId">New</span> Member</h2>
+<h2><span *ngIf="memberId">Edit</span><span *ngIf="!memberId">New</span> Member</h2>
+<form *ngIf="!loadingMember && !loadingCountries && !loadingCountriesFailed && !loadingMemberFailed" [formGroup]="form" (ngSubmit)="save(form.value)">
 
   <div class="form-group" [ngClass]="{'has-error':!form.controls['name'].valid}">
     <label class="form-label">Name</label>
-    <input class="form-control" formControlName="name" placeholder="Name"/>
+    <input class="form-control" formControlName="name" placeholder="Name" />
     <div class="alert alert-danger" *ngIf="!form.controls['name'].valid && form.controls['name'].touched">
       Name is required
     </div>
@@ -11,7 +11,7 @@
 
   <div class="form-group" [ngClass]="{'has-error':!form.controls['surname'].valid}">
     <label class="form-label">Surname</label>
-    <input class="form-control" formControlName="surname" placeholder="Surname"/>
+    <input class="form-control" formControlName="surname" placeholder="Surname" />
     <div class="alert alert-danger" *ngIf="!form.controls['surname'].valid && form.controls['surname'].touched">
       Surname is required
     </div>
@@ -29,6 +29,13 @@
   </div>
 
   <div class="form-group">
-    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid || saving"><span *ngIf="!saving">Save</span><span *ngIf="saving">Saving</span></button>
   </div>
 </form>
+
+<div class="load-message">
+  <div *ngIf="loadingCountries">Loading countries...</div>
+  <div *ngIf="loadingMember">Loading member...</div>
+  <div *ngIf="loadingCountriesFailed">Failed to load countries... click <a class="pointer" (click)="loadCountries()">here</a> to try again.</div>
+  <div *ngIf="loadingMemberFailed">Failed to load member... click <a class="pointer" (click)="loadMember()">here</a> to try again.</div>
+</div>

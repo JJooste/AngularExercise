@@ -17,7 +17,13 @@
       <td><a class="pointer" (click)="edit(member)">Edit</a></td>
     </tr>
     <tr *ngIf="members && members.length == 0">
-      <td colspan="4" class="emptyTable">No members to display... click <a class="pointer" (click)=newMember()>here</a> to add one</td>
+      <td colspan="4" class="tableMessage">No members to display... click <a class="pointer" (click)=newMember()>here</a> to add one</td>
+    </tr>
+    <tr *ngIf="loadingMembers">
+      <td colspan="4" class="tableMessage">Loading members...</td>
+    </tr>
+     <tr *ngIf="loadingFailed">
+      <td colspan="4" class="tableMessage">Loading members failed... click <a class="pointer" (click)=loadMembers()>here</a> to retry</td>
     </tr>
   </tbody>
 </table>
