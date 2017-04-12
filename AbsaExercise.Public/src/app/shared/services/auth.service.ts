@@ -43,10 +43,10 @@ export class AuthService {
     }
 
     showUnauthenticated() {
-        this.notificationService.displayError('Unauthenticated, please log in again');
+        this.notificationService.displayInfo('Unauthenticated, please log in again');
     }
 
     showUnauthorized() {
-        this.notificationService.displayError('Unauthorized, please log in again');
+        this.notificationService.displayInfo('Unauthorized, please log in again');
     }
 }
