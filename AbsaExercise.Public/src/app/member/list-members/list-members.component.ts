@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Member } from '../models/member';
+
 import { MemberService } from '../services/member.service';
+
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-list-members',
@@ -13,7 +17,7 @@ export class ListMembersComponent implements OnInit {
   loadingMembers: boolean;
   loadingFailed: boolean = false;
 
-  constructor(private memberService: MemberService, private router: Router) { }
+  constructor(private memberService: MemberService, private router: Router, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.loadMembers();
@@ -25,9 +29,9 @@ export class ListMembersComponent implements OnInit {
 
     this.memberService.getAll().subscribe(res => {
       this.members = res;
+      this.loadingMembers = false;
     }, error => {
       this.loadingFailed = true;
-    }, () => {
       this.loadingMembers = false;
     });
   }
@@ -41,7 +45,7 @@ export class ListMembersComponent implements OnInit {
   }
 
   buttonClicked(message: string) {
-    alert(message);
+    this.notificationService.displayInfo(message);
   }
 
 }

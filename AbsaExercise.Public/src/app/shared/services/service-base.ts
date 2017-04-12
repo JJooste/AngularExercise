@@ -1,11 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+
 import { ConfigService } from '../config/config.service';
 import { AuthService } from './auth.service';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
@@ -30,10 +30,10 @@ export class ServiceBase {
 
 
         if (error.status == 401) {
-            alert('Unauthenticated, please log in again');
+            this.authService.showUnauthenticated();
         }
         if (error.status == 403) {
-            alert('Unauthorized, please log in again');
+            this.authService.showUnauthorized();
         }
 
         var applicationError = error.headers.get('Application-Error');

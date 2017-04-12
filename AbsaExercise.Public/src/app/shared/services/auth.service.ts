@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+
 import { Subject } from 'rxjs/Subject';
+
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +11,7 @@ export class AuthService {
     private userNameSource = new Subject<string>();
     userName$ = this.userNameSource.asObservable();
 
-    constructor() {
+    constructor(private notificationService: NotificationService) {
         this.token = localStorage.getItem('auth-token');
 
         if (localStorage.getItem('userName'))
@@ -37,5 +40,13 @@ export class AuthService {
 
         localStorage.removeItem("auth-token");
         localStorage.removeItem("userName");
+    }
+
+    showUnauthenticated() {
+        this.notificationService.displayError('Unauthenticated, please log in again');
+    }
+
+    showUnauthorized() {
+        this.notificationService.displayError('Unauthorized, please log in again');
     }
 }

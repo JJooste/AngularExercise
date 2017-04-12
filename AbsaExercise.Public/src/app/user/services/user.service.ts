@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+
 import { User, Login, Register, Authentication, Token } from '../models/user';
+
 import { ServiceBase } from '../../shared/services/service-base';
 import { ConfigService } from '../../shared/config/config.service';
 import { AuthService } from '../../shared/services/auth.service';
+
 import { Observable } from 'rxjs';
 
 @Injectable()

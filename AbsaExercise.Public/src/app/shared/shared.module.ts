@@ -9,6 +9,7 @@ import { ConfigService } from './config/config.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { ServiceBase } from './services/service-base';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { ServiceBase } from './services/service-base';
   ],
   declarations: [ButtonComponent],
   exports: [ButtonComponent],
-  providers: [ConfigService, AuthService, AuthGuard, ServiceBase]
+  providers: [ConfigService, AuthService, AuthGuard, ServiceBase, NotificationService]
 })
 export class SharedModule { }

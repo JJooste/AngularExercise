@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Member } from '../models/member';
 import { Country } from '../models/country';
+
 import { CountryService } from '../services/country.service';
 import { MemberService } from '../services/member.service';
+
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-create-member',
@@ -25,7 +29,7 @@ export class CreateEditMemberComponent implements OnInit {
 
   saving: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private countryService: CountryService, private memberService: MemberService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private countryService: CountryService, private memberService: MemberService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.memberId = this.route.snapshot.params['member'];
@@ -68,7 +72,7 @@ export class CreateEditMemberComponent implements OnInit {
           } else {
             alert("Member could not be created");
           }
-
+          this.notificationService.displaySuccess("New member created!");
           this.saving = false;
         });
       } else {
@@ -78,7 +82,7 @@ export class CreateEditMemberComponent implements OnInit {
           } else {
             alert("Member could not be updated");
           }
-
+          this.notificationService.displaySuccess("Member details updated!");
           this.saving = false;
         });
       }
