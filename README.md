@@ -19,3 +19,5 @@ To log out, simply click on the "Log Out" link on the top right of the page.
 ## Additional Functionality
 The alert button below the Members table serves no purpose other than to illustrate the use of @Input and @Output properties in the shared button component. The same shared component is used for the "New Member" button above the Members table.
 
+## Using IE, Firefox or Older Browsers
+For the application to work on Internet Explorer or Firefox, be sure to edit the polyfill.ts file @ AbsaExercise.Public/src by un-commenting the relevant import statements and installing the relevant files.
