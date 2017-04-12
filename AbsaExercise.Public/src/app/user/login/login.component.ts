@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { Login } from '../models/user';
 
 import { AuthService } from '../../shared/services/auth.service';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,11 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
- form: FormGroup;
+  form: FormGroup;
 
- loggingIn: boolean = false;
+  loggingIn: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.authService.clearAuthentication();
@@ -36,15 +37,15 @@ export class LoginComponent implements OnInit {
     this.loggingIn = true;
 
     this.userService.login(login).subscribe(authentication => {
-      if(authentication.success) {
+      if (authentication.success) {
         this.authService.saveAuthentication(authentication.data.token, authentication.data.userName);
         this.router.navigate(['members']);
       } else {
-        alert(authentication.message);
+        this.notificationService.displayError(authentication.message);
       }
       this.loggingIn = false;
     }, error => {
-      alert("Login failed, please try again later.");
+      this.notificationService.displayError("Login failed, please try again later.");
       this.loggingIn = false;
     });
   }

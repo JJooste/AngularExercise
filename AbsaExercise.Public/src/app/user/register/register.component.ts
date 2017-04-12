@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { Register } from '../models/user';
 
 import { AuthService } from '../../shared/services/auth.service';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   registering: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private authService: AuthService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.initForm();
@@ -45,11 +46,11 @@ export class RegisterComponent implements OnInit {
         }
         this.registering = false;
       }, error => {
-        alert("Registration failed, please try again later.");
+        this.notificationService.displayError("Registration failed, please try again later.");
         this.registering = false;
       });
     } else {
-      alert("Passwords do not match.");
+      this.notificationService.displayError("Passwords do not match.");
     }
   }
 
