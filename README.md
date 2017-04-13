@@ -3,7 +3,7 @@ This exercise serves the purpose of illustrating basic Angular skills and princi
 As this is a MEAN stack solution, the backend is a NodeJS API with MongoDB used for the database.
 
 ## Getting Started
-To get the solution running with docker use the docker-compose defined in the root folder. The Angular application is configured to communicate with the API on http://localhost:3000 and the NodeJS API looks for the MongoDB connection on http://localhost:27017
+To get the solution running with docker use the docker-compose defined in the root folder. The Angular application is configured to communicate with the API on http://localhost:3000 and the NodeJS API looks for the MongoDB connection on http://database:27017
 so running the docker composition should be straight-forward, unless using docker quick start (this will require the addresses to be changed to the relevant IP addresses or URL's used).
 
 To alter the Angular App's reference to the API, go to the config.service.ts file @ AbsaExercise.Public/src/app/shared/config/.
